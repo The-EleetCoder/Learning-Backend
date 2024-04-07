@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
 //load config from evn file
@@ -12,18 +12,18 @@ app.use(express.json());
 const todoRoutes = require("./routes/todos");
 
 //mount the todo api routes
-app.use("/api/v1",todoRoutes);
+app.use("/api/v1", todoRoutes);
 
 //start server
-app.listen(PORT,() => {
-    console.log("App started running")
-})
+app.listen(PORT, () => {
+  console.log("App started running");
+});
 
 //connect to the database
 const dbConnect = require("./config/database");
 dbConnect();
 
 //default Route
-app.get("/",(req,res)=>{
-    res.send('<h1>This is Homepage baby!</h1>')
-})
+app.get("/", (req, res) => {
+  res.send("<h1>This is Homepage baby!</h1>");
+});

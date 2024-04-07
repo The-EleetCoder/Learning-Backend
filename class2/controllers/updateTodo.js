@@ -1,12 +1,20 @@
 const Todo = require("../models/Todo");
 
-exports.createTodo = async (req, res) => {
+exports.updateTodo = async (req, res) => {
   try {
-    //extract title and description from request body
+    const { id } = req.params;
     const { title, description } = req.body;
-    //create a new Todo object and insert in DB
-    const response = await Todo.create({ title, description });
-    //send a json response with a success flag
+    const findObject = await Todo.findById(id);
+
+    if (!findObject) {
+      return res.status(400).json({
+        success: false,
+        data: "No such object exists",
+        message: "Not Updated",
+      });
+    }
+    const response = await Todo.findByIdAndUpdate(id, { title, description });
+
     res.status(200).json({
       success: true,
       data: response,
