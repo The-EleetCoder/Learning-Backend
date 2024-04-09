@@ -1,15 +1,18 @@
-const moongoose = require('moongoose');
+const mongoose = require("mongoose");
 
 require("dotenv").config();
 
-const dbConnect = moongoose.connect(process.env.DATABASE_URL)
-.then(()=>{
-    console.log("Database connection established");
-})
-.catch((error)=>{
-    console.log("DB connection failed");
-    console.error(error.message);
-    process.exit(1);
-})
+const dbConnect = () => {
+  mongoose
+    .connect(process.env.DATABASE_URL)
+    .then(() => {
+      console.log("Database connection established");
+    })
+    .catch((error) => {
+      console.log("DB connection failed");
+      console.error(error.message);
+      process.exit(1);
+    });
+};
 
 module.exports = dbConnect;
